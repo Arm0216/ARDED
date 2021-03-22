@@ -14,18 +14,18 @@ schedules:
 pool:
   vmImage: 'ubuntu-latest'
 
-jobs:
-  - job: NodeTool@0
+steps:
+  - task: NodeTool@0
     inputs:
       versionSpec: '12.x'
     displayName: 'Install Node.js'
-  - job: CacheBeta@1
+  - task: CacheBeta@1
     inputs:
       key: npm | $(Agent.OS) | package-lock.json
       path: /home/vsts/.npm
       restoreKeys: npm | $(Agent.OS) | package-lock.json
     displayName: Cache NPM Packages
-  - job: CacheBeta@1
+  - task: CacheBeta@1
     inputs:
       key: cypress | $(Agent.OS) | package-lock.json
       path: /home/vsts/.cache/Cypress
