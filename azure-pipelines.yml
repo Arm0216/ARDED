@@ -11,7 +11,8 @@ schedules:
         - master
     always: true
 
-pool: MyPool
+pool:
+  vmImage: ubuntu-16.04
 
 steps:
   - task: NodeTool@0
