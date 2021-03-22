@@ -23,7 +23,6 @@ jobs:
           verbose: false
       - task: CmdLine@2
         displayName: Check Cypress Installed
-        inputs:
       - script:
           npx cypress verify
 
