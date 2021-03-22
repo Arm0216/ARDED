@@ -24,8 +24,8 @@ jobs:
       - task: CmdLine@2
         displayName: Check Cypress Installed
         inputs:
-          - script: &gt;
-                    npx cypress verify
+        - script: &gt;
+              npx cypress verify
 
 
   - job: Job_2
