@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cy:test": "npx cypress run –record –key <insert your record key>",
-    "cy:verify": "npx cypress verify"
+    "test": "npx cypress run",
+    "record": "npx cypress run",
+    "verify": "npx cypress verify"
   },
   "keywords": [],
   "author": "",
