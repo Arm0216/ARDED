@@ -3,43 +3,46 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-trigger:
-  - master
+schedules:
+  - cron: "35 12 * * *"
+    displayName: Daily midnight build
+    branches:
+      include:
+        - master
+    always: true
 
-jobs:
-- job:
-  pool:
-    vmImage: 'ubuntu-latest'
-- job:
-  steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '12.x'
-      displayName: 'Install Node.js'
-    - task: CacheBeta@1
-      inputs:
-        key: npm | $(Agent.OS) | package-lock.json
-        path: /home/vsts/.npm
-        restoreKeys: npm | $(Agent.OS) | package-lock.json
-      displayName: Cache NPM Packages
-    - task: CacheBeta@1
-      inputs:
-        key: cypress | $(Agent.OS) | package-lock.json
-        path: /home/vsts/.cache/Cypress
-        restoreKeys: cypress | $(Agent.OS) | package-lock.json
-      displayName: Cache Cypress binary
-    - script: |
-        npm install
-      displayName: 'npm install'
-    - script: npm run cy:verify
-      displayName: 'Cypress Verify'
-    - script: |
-        npx print-env AGENT
-        npx print-env BUILD
-        npx print-env SYSTEM
-        npm run cy:test
-      displayName: 'Scheduled Cypress tests'
-      env:
-        # avoid warnings about terminal
-        TERM: xterm
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.x'
+    displayName: 'Install Node.js'
+  - task: CacheBeta@1
+    inputs:
+      key: npm | $(Agent.OS) | package-lock.json
+      path: /home/vsts/.npm
+      restoreKeys: npm | $(Agent.OS) | package-lock.json
+    displayName: Cache NPM Packages
+  - task: CacheBeta@1
+    inputs:
+      key: cypress | $(Agent.OS) | package-lock.json
+      path: /home/vsts/.cache/Cypress
+      restoreKeys: cypress | $(Agent.OS) | package-lock.json
+    displayName: Cache Cypress binary
+  - script: |
+      npm install
+    displayName: 'npm install'
+  - script: npm run cy:verify
+    displayName: 'Cypress Verify'
+  - script: |
+      npx print-env AGENT
+      npx print-env BUILD
+      npx print-env SYSTEM
+      npm run cy:test
+    displayName: 'Scheduled Cypress tests'
+    env:
+      # avoid warnings about terminal
+      TERM: xterm
 
