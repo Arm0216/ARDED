@@ -22,17 +22,27 @@ steps:
       restoreKeys: cypress | $(Agent.OS) | package-lock.json
     displayName: Cache Cypress binary
   - script: |
-      npm install
-    displayName: 'npm install'
+        npm install
+        npm run build
+    displayName: 'npm install and build'
   - script: npm run cy:verify
     displayName: 'Cypress Verify'
   - script: |
-      npx print-env AGENT
-      npx print-env BUILD
-      npx print-env SYSTEM
-      npm run cy:test
-    displayName: 'Scheduled Cypress tests'
+        npx print-env AGENT
+        npx print-env BUILD
+        npx print-env SYSTEM
+        npm run start & npm run cy:test
+    displayName: 'Run Cypress tests'
     env:
-      # avoid warnings about terminal
-      TERM: xterm
-
+        # avoid warnings about terminal
+        TERM: xterm
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testRunner: JUnit
+      testResultsFiles: '$(Build.SourcesDirectory)/test/results/*.xml'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.SourcesDirectory)/build'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
