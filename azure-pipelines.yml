@@ -2,15 +2,11 @@
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  - master
+
 jobs:
-- job:
-  schedules:
-    - cron: "35 12 * * *"
-      displayName: Daily midnight build
-      branches:
-        include:
-          - master
-      always: true
 - job:
   pool:
     vmImage: 'ubuntu-latest'
