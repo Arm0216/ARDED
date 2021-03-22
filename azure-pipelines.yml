@@ -11,6 +11,8 @@ schedules:
         - master
     always: true
 
+pool: MyPool
+
 steps:
   - task: NodeTool@0
     inputs:
