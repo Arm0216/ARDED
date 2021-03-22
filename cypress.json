@@ -2,5 +2,9 @@
 {
   "testFiles": "**/*.feature",
   "baseUrl": "https://lrap-operations-dev.azurewebsites.net/account/login",
-  "defaultCommandTimeout": 40000
+  "defaultCommandTimeout": 40000,
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "test/results/e2e-tests-[hash].xml"
+  }
 }
