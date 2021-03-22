@@ -1,0 +1,11 @@
+;FFMETADATA1
+[CHAPTER]
+TIMEBASE=1/1000
+START=-29466
+END=17324
+title=Log in ARDEO page Login
+[CHAPTER]
+TIMEBASE=1/1000
+START=-12788
+END=64125
+title=Log in ARDEO page Verify log out functionality

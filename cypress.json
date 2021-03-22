@@ -1,0 +1,6 @@
+
+{
+  "testFiles": "**/*.feature",
+  "baseUrl": "https://lrap-operations-dev.azurewebsites.net/account/login",
+  "defaultCommandTimeout": 40000
+}
