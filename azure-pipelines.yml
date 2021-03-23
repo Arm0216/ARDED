@@ -1,7 +1,7 @@
 trigger:
   - master
 pool:
-  vmImage: 'ubuntu-16.04'
+  Image Version: 20210315.1
 
 jobs:
 - job: Linux
