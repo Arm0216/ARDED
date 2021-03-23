@@ -1,13 +1,12 @@
 trigger:
   - master
-
 pool:
   vmImage: 'ubuntu-16.04'
 
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '12.x'
+      versionSpec: '10.x'
     displayName: 'Install Node.js'
   - task: CacheBeta@1
     inputs:
