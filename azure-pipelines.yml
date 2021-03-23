@@ -1,7 +1,7 @@
 trigger:
   - master
 pool:
-  Image Version: 20210315.1
+  Image Version: alpine:3.10
 
 jobs:
 - job: Linux
